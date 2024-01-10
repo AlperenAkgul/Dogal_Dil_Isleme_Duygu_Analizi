@@ -15,7 +15,7 @@ Tweetlerin daha zengin olabilmesi için manuel olarak da eklemeler yapıldı.Top
 ![verilerin eklenmesi](https://github.com/AlperenAkgul/Twitter_Oppenheimer_Duygu_Analizi/assets/97761889/5a1568be-0228-4b8c-98a3-76222f7f5d5e)
 
 ## Verileri Etiketleme
-Tweetlerin her biri 1, 0 ya da -1 olacak şekilde etiketlendi. 1 'Pozitif', 0 'Negatif' tweet anlamına gelirken, -1 ise kesin bir duygu içermeyen veya konudan alakasız tweetler için kullanıldı.
+Tweetlerin her biri 1, 0 ya da -1 olacak şekilde etiketlendi. 1 "Pozitif", 0 "Negatif" tweet anlamına gelirken, -1 ise kesin bir duygu içermeyen veya konudan alakasız tweetler için kullanıldı.
 
 ## Verilerin Okunması
 
@@ -26,34 +26,44 @@ Buradan sonraki bütün adımlar <b>main.ipynb</b> dosyas içinde yer almaktadı
 ![kutuphaneler](https://github.com/AlperenAkgul/Twitter_Oppenheimer_Duygu_Analizi/assets/97761889/b98a6f05-b348-4fed-b5a7-661cd9aea67f)
 
 Daha sonra etiketlenmiş "<b>.csv</b>" dosyası programa yüklendi.
-1 veya 0 ile etiketlenmiş olan satırlar diğerlerinden ayırıldı. 589 tane 1 ile etiketlenmiş (pozitif) ve 136 tane 0 ile etiketlenmiş (negatif) olmak üzere toplam <b>725</b> duygu içeren tweet bulunmaktadır.
+1 veya 0 ile etiketlenmiş olan satırlar diğerlerinden ayırıldı. 589 tane 1 ile etiketlenmiş (pozitif) ve 136 tane 0 ile etiketlenmiş (negatif) olmak üzere toplam <b>725</b> duygu içeren tweet bulunmaktadır. Bu sayede DataFrame'deki duygu belirtmeyen ve işimize yaramayacak satırlardan kurtulmuş oluyoruz.
 
-Bir sonraki işlem tweetlerin dolgu sözcüklerinden, noktalama işaretlerinden vb. temizlenmesidir. Temizlenen tweetler "<b>clean</b>" adında bir sütun olarak DataFrame'ye eklendi. Daha sonra metinde hala bulunan harf dışındaki özel karakterlerin temizlenmesi ile birlikte sadece harflerden ve rakamlardan oluşan bir metin elde edildi.
+Bir sonraki işlem ise tweetlerin dolgu sözcüklerinden, noktalama işaretlerinden vb. temizlenmesidir. Temizlenen tweetler "<b>clean</b>" adında bir sütun olarak DataFrame'ye eklendi. Daha sonra metinde hala bulunan harf dışındaki özel karakterlerin temizlenmesi ile birlikte sadece harflerden ve rakamlardan oluşan bir metin elde edildi.
 ### Eski ve Temizlenmiş Metinin Arasındaki Fark:
 ![temizlenmismetin](https://github.com/AlperenAkgul/Twitter_Oppenheimer_Duygu_Analizi/assets/97761889/64bbc345-76dc-44a3-b205-c0dcb5de38f0)
 
 ## Modelin Eğitimi ve Skorlar
 Verilerin metin kısımları X, etiketler Y dizisi olacak şekilde ayırıldı ve numpy dizisi haline dönüştürüldü.
-Verilerin %20'si test verisi olacak şekilde ayırıldı.
+Verilerin %20'si test verisi olacak şekilde ayırıldı. Ayrıca verilerin karışık şekilde dağılması için rastgele bir random_state değeri atandı.
 X dizisinin eğitim ve test kısmı TF-IDF kullanılarak vektörleştirildi.
 
 ### Karar Ağacı:
 
 ![karar](https://github.com/AlperenAkgul/Twitter_Oppenheimer_Duygu_Analizi/assets/97761889/c2b89308-fb21-4773-82d9-7f081b36c006)
 
+İlk olarak Karar Ağaçlarını kullanıldı. DecTree.fit() fonksiyonu ile modeli eğitildi.
+DecTree.score kullanarak model, ayırdığımız %20'lik kısmın etiketlerini tahmin etmeye çalıştı.
 Karar Ağacı modelini kullandığımızda %88 başarı oranı elde edilmektedir.
 
 ### Naive Bayes:
 
 ![nb](https://github.com/AlperenAkgul/Twitter_Oppenheimer_Duygu_Analizi/assets/97761889/29e50e9f-68ea-4e16-9cac-22dc39687e03)
 
+Aynı işlemler Naive Bayes modeli içinde tekrarlandı.
 Naive Bayes modeli kullanıldığında %86 başarı oranı elde edilmektedir.
 
 ### Support Vector Machine:
 
 ![svm](https://github.com/AlperenAkgul/Twitter_Oppenheimer_Duygu_Analizi/assets/97761889/d8799665-00fd-442b-83df-854333fd93f3)
 
+Parametre olarak "<b>linear</b>" seçildi.
 SVM modeli kullanıldığında ise %93 başarı oranı elde edilmektedir.
+
+## Modelin Diske Kaydedilmesi ve Yüklenmesi
+
+![disk](https://github.com/AlperenAkgul/Twitter_Oppenheimer_Duygu_Analizi/assets/97761889/431adef5-1b04-4758-9fb7-43e2daf16014)
+
+Eğer istenirse model ve vektörleştirici diske kaydedilebilir ve diskten geri yüklenebilir.
 
 ## Örnek Cümle Girişi
 
@@ -62,4 +72,4 @@ Modeli test etmek için aşağıdaki resimde bulunan örnek cümleler girildi. K
 ![ornekler](https://github.com/AlperenAkgul/Twitter_Oppenheimer_Duygu_Analizi/assets/97761889/f731af82-dd04-4c2c-acc9-8b276aa8dd09)
 
 ## Sonuç:
-Üç algoritma da başarılı sonuç vermiştir. Fakat Support Vector Machine algoritmasının diğer algoritmalardan daha iyi olduğu görülebilmektedir. 
+Üç algoritma da başarılı sonuç vermiştir. Fakat Support Vector Machine algoritmasının diğer algoritmalardan daha iyi olduğu görülebilmektedir. Bunun yanında daha fazla tweet ve daha iyi yapılabilecek olan temizleme işlemi ile elde edilebilecek başarı oranı arttırılabilir.
