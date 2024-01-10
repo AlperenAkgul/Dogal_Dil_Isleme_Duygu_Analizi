@@ -68,6 +68,7 @@ Eğer istenirse model ve vektörleştirici diske kaydedilebilir ve diskten geri 
 ## Örnek Cümle Girişi
 
 Modeli test etmek için aşağıdaki resimde bulunan örnek cümleler girildi. Kodun çıktısında cümlelerin temizlenmiş hali görülebilir. Model olarak Karar Ağacı kullanılmıştır. Karar Ağacı modelinin verdiği sonuçlar doğrudur.
+(1: "Pozitif", 0: "Negatif")
 
 ![ornekler](https://github.com/AlperenAkgul/Twitter_Oppenheimer_Duygu_Analizi/assets/97761889/f731af82-dd04-4c2c-acc9-8b276aa8dd09)
 
