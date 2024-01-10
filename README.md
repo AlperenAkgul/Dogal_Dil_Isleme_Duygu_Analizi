@@ -1,11 +1,11 @@
 # Twitter Oppenheimer Filmi Tweetleri Duygu Analizi
-Twitter'da Oppenheimer filmi hakkında atılmış tweetlerin, olumlu veya olumsuz duygu taşıyıp taşımadığını tahmin eden Doğal Dil İşleme sınıflandırma projesidir. Karar Ağacı, Naive Bayes ve Support Vector Machine algoritmaları kullanılmıştır.
+Twitter'da Oppenheimer filmi hakkında atılmış tweetlerin, olumlu veya olumsuz duygu taşıyıp taşımadığını tahmin eden Doğal Dil İşleme sınıflandırma projesidir. Karar Ağacı, Naive Bayes ve Support Vector Machine algoritmaları kullanılmış ve başarıları karşılaştırılmıştır.
 
 ## Twitter'dan Tweetlerin Çekilmesi
 ### Tweetleri Çekerken Yararlandığım Video: https://www.youtube.com/watch?v=MNEw3Mplm7E <br>
 Twitter'dan veri çekilme işlemi "<b>scrapper.ipynb</b>" dosyası içinde yer almaktadır.
-Twitter'dan tweetlerin çekilebilmesi için Nitter denilen bir scrapper kullanılmıştır. Tweetler çekilirken hangi verilerin istendiği açıkça belirtilebilir.(örneğin beğenme sayısı, tarih).
-Tweetler çekilirken sadece metin içeriğinin çekilmesi tercih edildi. Veriler çekilirken Oppenheimer filminin vizyon tarihi olan 21 Temmuz'dan günümüze ve ingilizce olacak şekilde arama sorguları girildi. Dil olarak İngilizce seçilme nedeni daha fazla sayıda veriye ulaşabilmektir
+Twitter'dan tweetlerin çekilebilmesi için Nitter isminde bir scrapper kullanılmıştır. Tweetler çekilirken hangi verilerin istendiği açıkça belirtilebilir.(örneğin beğenme sayısı, tarih).
+Tweetler çekilirken sadece metin içeriğinin çekilmesi tercih edildi. Veriler çekilirken Oppenheimer filminin vizyon tarihi olan 21 Temmuz'dan günümüze ve ingilizce olacak şekilde arama sorguları girildi. Dil olarak İngilizce seçilme nedeni daha fazla sayıda veriye ulaşabilmektir.
 ### Örnek Bir Sorgu:
 ![arama sorgusu](https://github.com/AlperenAkgul/Twitter_Oppenheimer_Duygu_Analizi/assets/97761889/e59f7e2e-bb5a-4ceb-be5f-74e2422d21d4)
 
@@ -19,7 +19,7 @@ Tweetlerin her biri 1, 0 ya da -1 olacak şekilde etiketlendi. 1 "Pozitif", 0 "N
 
 ## Verilerin Okunması
 
-Buradan sonraki bütün adımlar <b>main.ipynb</b> dosyas içinde yer almaktadır.
+Buradan sonraki bütün adımlar <b>main.ipynb</b> dosyası içinde yer almaktadır.
 
 İlk olarak gerekli kütüphaneler eklendi.
 ### Gerekli Kütüphaneler:
@@ -41,7 +41,7 @@ X dizisinin eğitim ve test kısmı TF-IDF kullanılarak vektörleştirildi.
 
 ![karar](https://github.com/AlperenAkgul/Twitter_Oppenheimer_Duygu_Analizi/assets/97761889/c2b89308-fb21-4773-82d9-7f081b36c006)
 
-İlk olarak Karar Ağaçlarını kullanıldı. DecTree.fit() fonksiyonu ile modeli eğitildi.
+İlk olarak Karar Ağaçlarını kullanıldı. DecTree.fit() fonksiyonu ile model eğitildi.
 DecTree.score kullanarak model, ayırdığımız %20'lik kısmın etiketlerini tahmin etmeye çalıştı.
 Karar Ağacı modelini kullandığımızda %88 başarı oranı elde edilmektedir.
 
@@ -67,7 +67,7 @@ Eğer istenirse model ve vektörleştirici diske kaydedilebilir ve diskten geri 
 
 ## Örnek Cümle Girişi
 
-Modeli test etmek için aşağıdaki resimde bulunan örnek cümleler girildi. Kodun çıktısında cümlelerin temizlenmiş hali görülebilir. Model olarak Karar Ağacı kullanılmıştır. Karar Ağacı'nın verdiği sonuç doğrudur.
+Modeli test etmek için aşağıdaki resimde bulunan örnek cümleler girildi. Kodun çıktısında cümlelerin temizlenmiş hali görülebilir. Model olarak Karar Ağacı kullanılmıştır. Karar Ağacı modelinin verdiği sonuçlar doğrudur.
 
 ![ornekler](https://github.com/AlperenAkgul/Twitter_Oppenheimer_Duygu_Analizi/assets/97761889/f731af82-dd04-4c2c-acc9-8b276aa8dd09)
 
